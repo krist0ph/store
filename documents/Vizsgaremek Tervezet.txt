@@ -1,0 +1,59 @@
+Projekt megtervezése 🔄
+
+- Webshop témája
+- Célközönség meghatározása
+- Funkciók összegyűjtése
+- Technológiák kiválasztása
+- Követelménylista
+- Környezet felállítása
+
+
+Adatbázis megtervezése 🔄
+
+- Felhasználók
+- Termékek
+- Kosár
+- Rendelések
+
+
+UI / UX megtervezése 🔄
+
+- Oldalak kidolgozása
+( Képek a references mappában találhatóak )
+
+
+Backend 🔄
+
+- REST API
+- Regisztráció
+- Bejelentkezés
+- Profil kezelés
+- Termékek kezelése
+- Kosár kezelése
+- Adatbázis kezelése
+- Rendelések fogadása
+
+
+Admin felület 🔄
+
+- Admin Bejelentkezés
+- Termék hozzáadása / törlése / módosítása
+- Felhasználók kezelése
+- Rendelések kezelése
+
+
+Tesztelés 🔄
+
+- Regisztráció tesztelése
+- Bejelentkezés tesztelése
+- Böngészés tesztelése
+- Rendelés tesztelése
+- Hiba kezelés tesztelése
+
+
+Dokumentáció 🔄
+
+- PPT elkészítése
+- Kézikönyv megírása
+- Dokumentálás
+- Verziókezelés
