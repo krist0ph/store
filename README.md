@@ -3,7 +3,7 @@
 ㅤ
 ## Projekt leírása
 
-A vizsgaremek egy katonai felszereléseket forgalmazó webshop. A webshop célja, hogy a felhasználók egyszerűen és könnyedén böngészhessenek a termékek között, megtekinthessék azok részletes adatait, valamint online vásárláshassanak.
+A vizsgaremek egy katonai felszereléseket forgalmazó webshop. A webshop célja, hogy a felhasználók egyszerűen és könnyedén böngészhessenek a termékek között, megtekinthessék azok részletes adatait, valamint online rendelhessenek.
 
 ## Főbb funkciók
 
@@ -12,5 +12,5 @@ A vizsgaremek egy katonai felszereléseket forgalmazó webshop. A webshop célja
 - Termékek részletes adatainak megtekintése
 - Kosár kezelése
 - Felhasználói regisztráció és bejelentkezés
-- Online vásárlás
+- Online rendelés
 - Adminisztrációs felület a termékek kezeléséhez
