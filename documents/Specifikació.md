@@ -108,3 +108,9 @@
 - JavaScript
 - SQLite
 - Node.js
+
+# Felhasználók
+
+- Admin felhasználó
+- Fogyasztói felhasználó
+
