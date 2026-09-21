@@ -111,6 +111,6 @@
 
 # Felhasználók
 
-- Admin felhasználó
-- Fogyasztói felhasználó
+- Admin fiók
+- Fogyasztói fiók
 
