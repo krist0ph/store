@@ -15,4 +15,4 @@ A vizsgaremek egy katonai felszereléseket forgalmazó webshop. A webshop célja
 - Online rendelés
 - Adminisztrációs felület a termékek kezeléséhez
 
-# További információért tekintse meg a Specifikáció.md fájlt a documents mappában!
+### További információért tekintse meg a Specifikáció.md fájlt a documents mappában!
