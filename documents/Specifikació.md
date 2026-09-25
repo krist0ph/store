@@ -6,22 +6,30 @@
 - Profil megtekintése
 - Profil adatainak módosítása
 - Jelszó módosítása
-- Felhasználói adatok kezelése
-- Szállítási adatok kezelése
+- Felhasználói adatok módosítása
+- Szállítási adatok módosítása
+- Keresés / Szűrés
+- Termék megtekintése
+- Rendelés leadása
+- Rendelés törlése
+- Rendelés részleteinek megtekintése
 
-# Termékek
+# Admin funkciók
 
-- Termékek megtekintése
-- Terméklista megjelenítése
-- Termék részleteinek megtekintése
-- Termékek keresése
-- Termékek kategória szerinti szűrése
-- Termék neve
-- Termék leírása
-- Termék ára
-- Termék képe
-- Termék kategóriája
-- Termék készletinformációja
+- Adminisztrátori bejelentkezés
+- Termék hozzáadása
+- Termék módosítása
+- Termék törlése
+- Felhasználók megtekintése
+- Felhasználók kezelése
+- Felhasználó módosítása
+- Felhasználó törlése
+- Rendelések megtekintése
+- Rendelések kezelése
+- Rendelések státuszának módosítása
+- Rendelések visszaigazolása
+- Rendelés részleteinek megtekintése
+- Korábbi rendelések megtekintése
 
 # Kosár
 
@@ -33,45 +41,14 @@
 - Végösszeg megjelenítése
 - Készlet ellenőrzése vásárláskor
 
-# Rendelések
-
-- Rendelés leadása
-- Rendelés adatainak megadása
-- Rendelés visszaigazolása
-- Korábbi rendelések megtekintése
-- Rendelés részleteinek megtekintése
-- Rendelés dátumának tárolása
-- Rendelés státuszának tárolása
-- Rendelési tételek tárolása
-
-# Admin felület
-
-- Adminisztrátori bejelentkezés
-- Adminisztrátori jogosultság ellenőrzése
-- Admin felület elérése
-- Termék hozzáadása
-- Termék módosítása
-- Termék törlése
-- Készlet módosítása
-- Felhasználók megtekintése
-- Felhasználók kezelése
-- Felhasználó módosítása
-- Felhasználó törlése
-- Rendelések megtekintése
-- Rendelések kezelése
-- Rendelés státuszának módosítása
-
 # Adatbázis
 
 - Felhasználók adatainak tárolása
 - Termékek adatainak tárolása
 - Kategóriák tárolása
 - Kosarak tárolása
-- Kosártételek tárolása
 - Rendelések tárolása
-- Rendelési tételek tárolása
 - Táblák közötti kapcsolatok kialakítása
-- Adatok konzisztens tárolása
 
 # Backend / REST API
 
@@ -107,10 +84,11 @@
 - CSS
 - JavaScript
 - SQLite
-- Node.js
+- Node.JS
 
-# Felhasználók
+# Adatbázis táblák
 
-- Admin fiók
-- Fogyasztói fiók
-
+- Felhasználók
+- Termékek
+- Rendelések
+- Rendelés részletei
