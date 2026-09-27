@@ -1,13 +1,18 @@
 {
   "name": "source",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "description": "Vizsgaremek",
+  "main": "server.js",
+  "scripts": {},
   "keywords": [],
-  "author": "",
+  "author": "Kesha",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^13.0.3",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
 }
