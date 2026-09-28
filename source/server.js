@@ -7,7 +7,6 @@ const app = express()
 app.use(express.static('static/pages'))
 app.use(express.json())
 
-
 // Register
 
 // Login
