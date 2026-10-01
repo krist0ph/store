@@ -11,11 +11,35 @@ app.use(express.json())
 
 // Login
 
+// Logout
+
+// Change Password
+
+// Current User Profile
+
+// Modify Profile
+
+// Product List / Search / Filter
+
+// Product Details
+
 // Cart
 
-// Checkout
+// Add to Cart
 
-// Profile
+// Remove from Cart
+
+// Change quantity
+
+// Track orders
+
+// Place orders
+
+// Cancel orders
+
+// Order details
+
+// Modify shipping information
 
 app.listen(1000, () => {
     console.log('Server running on https://localhost:1000')
