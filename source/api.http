@@ -1,0 +1,21 @@
+### Register new user
+# Expecting 201 for succesful registration, 500 for internal server error and 400 for missing credentials.
+
+POST http://localhost:1000/api/register
+Content-Type: application/json
+
+{
+    "email" : "levi@email.com",
+    "password" : "levi"
+}
+
+### Login user
+# Expecting 200 for sucessful login, 400 for missing credentials, 401 for missing database credentials and invalid password
+
+POST http://localhost:1000/api/login
+Content-Type: application/json
+
+{
+    "email" : "levi@email.com",
+    "password" : "levi"
+}

@@ -3,16 +3,25 @@ const bcrypt = require('bcrypt')
 const dotenv = require('dotenv')
 const crypto = require('crypto')
 const Database = require('better-sqlite3')
+const rateLimit = require('express-rate-limit')
 
 const app = express()
 const db = new Database('database.db')
 
 const passwordSalt = 10
 
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 10,
+    message: {
+        error: 'Too many attempts, please try again later'
+    }
+})
+
 dotenv.config()
 
 app.use(express.static('static/pages'))
-app.use(express.json())
+app.use(express.json({ limit: '10kb' }))
 
 // —————————————— //
 // Authentication //
@@ -20,26 +29,40 @@ app.use(express.json())
 
 // Register
 
-app.post('/api/register', async (req, res) => {
+app.post('/api/register', authLimiter, async (req, res) => {
     const { email, password } = req.body
 
-    if (!email || !password) {
+    if (typeof email !== 'string' || typeof password !== 'string') {
         return res.status(400).json({
-            error: 'All fields are required to register'
+            error: 'Invalid registration data'
         })
     }
 
-    const passwordHash = await bcrypt.hash(password, passwordSalt)
+    const normalizedEmail = email.trim().toLowerCase()
 
-    const userId = crypto.randomUUID()
+    if (!normalizedEmail || !password) {
+        return res.status(400).json({
+            error: 'All fields are required for registration'
+        })
+    }
+
+    if (password.length < 8) {
+        return res.status(400).json({
+            error: 'Password must be at least 8 characters'
+        })
+    }
 
     try {
+        const passwordHash = await bcrypt.hash(password, passwordSalt)
         const statement = db.prepare(`insert into users (email, password, userid) values (?, ?, ?)`)
-        const result = statement.run(email, passwordHash, userId)
+        const userId = crypto.randomUUID()
+        
+        statement.run(normalizedEmail, passwordHash, userId)
 
         res.status(201).json({
-            message: 'User registered sucessfully'
+            message: 'User registered successfully'
         })
+        
     } catch (registrationError) {
         res.status(500).json({
             error: 'Could not register user'
@@ -49,21 +72,29 @@ app.post('/api/register', async (req, res) => {
 
 // Login
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/login', authLimiter, async (req, res) => {
     const { email, password } = req.body
 
-    if (!email || !password) {
+    if (typeof email !== 'string' || typeof password !== 'string') {
+        return res.status(400).json({
+            error: 'Invalid credentials'
+        })
+    }
+
+    const normalizedEmail = email.trim().toLowerCase()
+
+    if (!normalizedEmail || !password) {
         return res.status(400).json({
             error: 'Email and password required'
         })
     }
 
     const statement = db.prepare(`select * from users where email = ?`)
-    const user = statement.get(email)
+    const user = statement.get(normalizedEmail)
 
     if (!user) {
         return res.status(401).json({
-            error: 'User does not exist in database'
+            error: 'Invalid credentials'
         })
     }
 
@@ -71,7 +102,7 @@ app.post('/api/login', async (req, res) => {
 
     if (!passwordMatch) {
         return res.status(401).json({
-            error: 'Invalid email or password'
+            error: 'Invalid credentials'
         })
     }
 
