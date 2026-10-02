@@ -82,7 +82,7 @@ Vissza vonja a rendelést.
 Megejelenití a megrendelés információit (mennyibe kerül, mit vettünk, hova hozzák ki).
 
 
-# Modify shipping information
+## Modify shipping information
 
 Beállíthatjuk a szálitás adatait (cím, hogy milyen gyorsan szállítsák ki). 
 
