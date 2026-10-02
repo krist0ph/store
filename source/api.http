@@ -6,16 +6,30 @@ Content-Type: application/json
 
 {
     "email" : "levi@email.com",
-    "password" : "levi"
+    "password" : "levi1234"
 }
 
+
+
 ### Login user
-# Expecting 200 for sucessful login, 400 for missing credentials, 401 for missing database credentials and invalid password
+# Expecting 200 for successful login, 400 for missing credentials, 401 for missing database credentials and invalid password
 
 POST http://localhost:1000/api/login
 Content-Type: application/json
 
 {
     "email" : "levi@email.com",
-    "password" : "levi"
+    "password" : "levi1234"
 }
+
+
+
+### Logout
+# Expecting 200 for successful logout, 500 for internal server error
+POST http://localhost:1000/api/logout
+
+
+
+### Load User Profile
+# Aint expecting shit!
+GET http://localhost:1000/api/profile
