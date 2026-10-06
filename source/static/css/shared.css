@@ -1,0 +1,14 @@
+:root {
+  --backgroundColor: #101010;
+  --secondaryBackgroundColor: #151515;
+  --fontColor: #ffffff;
+  --secondaryFontColor: #c3c3c3;
+  --tetriaryColor: #707070;
+  --separatorColor: #303030;
+  --linkColor: #3292ff;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}

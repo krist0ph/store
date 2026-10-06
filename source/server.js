@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const path = require('path')
 const express = require('express')
 const bcrypt = require('bcrypt')
 const crypto = require('crypto')
@@ -14,8 +15,9 @@ const sessionDatabase = new Database('sessions.db')
 
 const passwordSalt = 10
 
-app.use(express.static('static/pages'))
+app.use(express.static('static'))
 app.use(express.json({ limit: '10kb' }))
+
 app.use(session({
     name: 'sid',
     secret: process.env.SESSION_SECRET,
@@ -29,6 +31,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }))
+
 app.set('trust proxy', 1)
 
 const authLimiter = rateLimit({
@@ -53,6 +56,10 @@ function requireLogin(req, res, next) {
 // —————————————— //
 
 // Register
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/register.html'))
+})
 
 app.post('/api/register', authLimiter, async (req, res) => {
     const { email, password } = req.body
@@ -96,6 +103,10 @@ app.post('/api/register', authLimiter, async (req, res) => {
 })
 
 // Login
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/login.html'))
+})
 
 app.post('/api/login', authLimiter, async (req, res) => {
     const { email, password } = req.body
@@ -287,5 +298,5 @@ app.get('/api/profile', requireLogin, (req, res) => {
 // Modify shipping information
 
 app.listen(1000, () => {
-    console.log('Server running on https://localhost:1000')
+    console.log('Server running on http://localhost:1000')
 })

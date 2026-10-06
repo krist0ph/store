@@ -5,8 +5,8 @@ POST http://localhost:1000/api/register
 Content-Type: application/json
 
 {
-    "email" : "levi@email.com",
-    "password" : "levi1234"
+    "email" : "",
+    "password" : ""
 }
 
 
@@ -18,8 +18,8 @@ POST http://localhost:1000/api/login
 Content-Type: application/json
 
 {
-    "email" : "levi@email.com",
-    "password" : "levi1234"
+    "email" : "palotaikrili@gmail.com",
+    "password" : ""
 }
 
 
