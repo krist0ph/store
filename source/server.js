@@ -281,12 +281,24 @@ app.get('/api/profile', requireLogin, (req, res) => {
 
 // Cart
 
-app.get('/cart', (req, res) => {
+app.get('/cart', requireLogin, (req, res) => {
     res.sendFile(path.join(__dirname, 'static/cart.html'))
 })
 
-app.get('/api/cart', authLimiter, requireLogin, (req, res) => {
-    
+app.get('/api/cart', requireLogin, (req, res) => {
+    try {
+        const statement = defaultDatabase.prepare(`select cart.product_id, cart.quantity, cart.total_price, products.name, products.price from cart join product on products.product_id, where cart.user_id = ?`)
+
+        const items = statement.all(req.session.userId)
+
+        res.json({
+            items
+        })
+    } catch (cartError) {
+        res.status(500).json({
+            error: 'Could not load cart'
+        })
+    }
 })
 
 // Add to Cart
