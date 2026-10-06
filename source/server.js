@@ -281,6 +281,14 @@ app.get('/api/profile', requireLogin, (req, res) => {
 
 // Cart
 
+app.get('/cart', (req, res) => {
+    res.sendFile(path.join(__dirname, 'static/cart.html'))
+})
+
+app.get('/api/cart', authLimiter, requireLogin, (req, res) => {
+    
+})
+
 // Add to Cart
 
 // Remove from Cart
