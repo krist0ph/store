@@ -1,1 +1,3 @@
 npm i bcrypt better-sqlite3 better-sqlite3-session-store dotenv express express-rate-limit express-session
+
+// Do this when pulling fresh changes from the repository since uploading the package folder is way too complicated
