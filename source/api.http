@@ -1,35 +1,172 @@
-### Register new user
-# Expecting 201 for succesful registration, 500 for internal server error and 400 for missing credentials.
+@baseUrl = http://localhost:1000
+@testEmail = test-user-1@example.com
+@testPassword = password123
 
-POST http://localhost:1000/api/register
+# Register creates a real user, so a second run returns 409 instead of 201.
+# Before each run, change the number in @testEmail (test-user-2, test-user-3, ...).
+# Run the requests top to bottom: register -> login -> profile -> logout.
+# Also restart the server between runs, or set AUTH_RATE_LIMIT=1000 in .env.
+
+
+### 1. Profile before login
+# Expecting 401 {"error": "Not logged in"}
+GET {{baseUrl}}/api/profile
+
+
+
+### 2. Register: empty credentials
+# Expecting 400
+POST {{baseUrl}}/api/register
 Content-Type: application/json
 
 {
-    "email" : "",
-    "password" : ""
+    "email": "",
+    "password": ""
 }
 
 
 
-### Login user
-# Expecting 200 for successful login, 400 for missing credentials, 401 for missing database credentials and invalid password
+### 3. Register: no body
+# Expecting 400
+POST {{baseUrl}}/api/register
+Content-Type: application/json
 
-POST http://localhost:1000/api/login
+
+
+### 4. Register: wrong data types
+# Expecting 400 {"error": "Invalid registration data"}
+POST {{baseUrl}}/api/register
 Content-Type: application/json
 
 {
-    "email" : "palotaikrili@gmail.com",
-    "password" : ""
+    "email": 12345,
+    "password": ["not", "a", "string"]
 }
 
 
 
-### Logout
-# Expecting 200 for successful logout, 500 for internal server error
-POST http://localhost:1000/api/logout
+### 5. Register: invalid email format
+# Expecting 400 {"error": "Please provide a valid email address"}
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+    "email": "not-an-email",
+    "password": "password123"
+}
 
 
 
-### Load User Profile
-# Aint expecting shit!
-GET http://localhost:1000/api/profile
+### 6. Register: password too short
+# Expecting 400 {"error": "Password must be at least 8 characters"}
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+    "email": "short-password@example.com",
+    "password": "1234567"
+}
+
+
+
+### 7. Register: password too long (73 characters)
+# Expecting 400 {"error": "Password too long"}
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+    "email": "long-password@example.com",
+    "password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}
+
+
+
+### 8. Register: success
+# Expecting 201 {"message": "User registered successfully"}
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+    "email": "{{testEmail}}",
+    "password": "{{testPassword}}"
+}
+
+
+
+### 9. Register: duplicate email
+# Expecting 409 {"error": "That email address is already registered"}
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+    "email": "{{testEmail}}",
+    "password": "{{testPassword}}"
+}
+
+
+
+### 10. Login: missing password
+# Expecting 400 {"error": "Email and password required"}
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "email": "{{testEmail}}",
+    "password": ""
+}
+
+
+
+### 11. Login: unknown email
+# Expecting 401 {"error": "Invalid credentials"}
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "email": "nobody-{{$guid}}@example.com",
+    "password": "password123"
+}
+
+
+
+### 12. Login: wrong password
+# Expecting 401 {"error": "Invalid credentials"} (same message as request 11)
+# The response headers must NOT contain a Set-Cookie for sid
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "email": "{{testEmail}}",
+    "password": "wrong-password"
+}
+
+
+
+### 13. Login: success
+# Expecting 200 {"message": "Login successful"}
+# The response headers must contain: Set-Cookie: sid=...; HttpOnly; SameSite=Lax
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+    "email": "{{testEmail}}",
+    "password": "{{testPassword}}"
+}
+
+
+
+### 14. Profile after login
+# Expecting 200 with your id and email, and NO password field
+GET {{baseUrl}}/api/profile
+
+
+
+### 15. Logout
+# Expecting 200 {"message": "Logged out"}
+POST {{baseUrl}}/api/logout
+
+
+
+### 16. Profile after logout
+# Expecting 401 {"error": "Not logged in"}
+GET {{baseUrl}}/api/profile
